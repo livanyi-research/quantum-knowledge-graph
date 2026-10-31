@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b1323">
+  <meta name="description" content="Quantum Knowledge Graph 1.0 – interaktív, fokozatosan ellenőrzött kvantumfizikai tudásháló.">
+  <title>Quantum Knowledge Graph 1.0 | Interaktív tudásháló</title>
+  <style>
+    :root { color-scheme: dark; --bg:#091121; --card:#111f34; --card2:#182a45; --ink:#edf5ff; --muted:#bbccdf; --outline:#395474; --teal:#61e3d3; --violet:#bbaaff; --gold:#ffd58b; }
+    * {box-sizing:border-box}
+    html {scroll-behavior:smooth}
+    body {margin:0; background:radial-gradient(circle at 15% -15%, #183659 0%,transparent 38%),var(--bg); color:var(--ink); font: 16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+    a {color:var(--teal)}
+    .shell {width:min(1160px, 100% - 32px); margin:auto}
+    header {padding:38px 0 18px}
+    .eyebrow {font-size:.79rem; letter-spacing:.17em; text-transform:uppercase; color:var(--teal); font-weight:800}
+    h1 {font-size:clamp(2rem,5vw,3.5rem);line-height:1.1;letter-spacing:-.04em;margin:10px 0}
+    h2 {font-size:1.4rem; line-height:1.3; margin:0 0 14px}
+    p {margin:0 0 1rem}
+    .lead {color:var(--muted);max-width:760px;font-size:1.04rem}
+    .badges {display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 4px}
+    .badge {font-size:.79rem;background:#1d3350;border:1px solid #344f6e;border-radius:50px;padding:5px 12px}
+    main {padding-bottom:64px}
+    .notice {margin:16px 0 20px;padding:14px 17px;border:1px solid #7b683f;background:#302c25;border-radius:14px;color:#ffe9bd}
+    .panel {background:var(--card);border:1px solid var(--outline);border-radius:18px;padding:clamp(14px,3vw,23px);box-shadow:0 18px 48px #03091135}
+    .toolbar {display:flex;flex-wrap:wrap;gap:9px;margin:10px 0 16px}
+    button {border:1px solid #536c8b;background:#172b46;color:var(--ink);border-radius:10px;padding:10px 13px;font:inherit;font-size:.9rem;cursor:pointer;touch-action:manipulation}
+    button:hover,button:focus-visible {outline:2px solid var(--teal);outline-offset:2px}
+    button[aria-pressed="true"] {border-color:var(--teal);background:#1d5052;color:#fff;font-weight:700}
+    .map-help {font-size:.87rem;color:var(--muted);margin:0 0 10px}
+    .map-scroll {overflow-x:auto;overscroll-behavior-inline:contain;border-radius:13px;border:1px solid #36516f;background:linear-gradient(#0d1c30,#0a1728);-webkit-overflow-scrolling:touch}
+    .map-scroll svg {display:block;min-width:850px;width:100%;height:auto;}
+    .edge {stroke:#56718f;stroke-width:2.2;opacity:.75;fill:none}
+    .edge.subtle {stroke-dasharray:6 7;stroke:#bea7ff;opacity:.67}
+    .node {cursor:pointer;outline:none}
+    .node rect {fill:#172e4a;stroke:#5a789a;stroke-width:1.7;rx:13}
+    .node text {fill:#edf5ff;font-size:15px;font-weight:700;pointer-events:none}
+    .node .mini {font-size:11px;font-weight:400;fill:#c9d9e9}
+    .node[data-track="alap"] rect {stroke:var(--violet)}
+    .node[data-track="kemia"] rect {stroke:var(--teal)}
+    .node[data-track="hidrogen"] rect {stroke:var(--gold)}
+    .node:focus rect,.node.selected rect {stroke-width:3;fill:#25496b;filter:drop-shadow(0 2px 12px #59dfdf45)}
+    .node.faded {opacity:.23}
+    .edge.faded {opacity:.12}
+    .two {display:grid;grid-template-columns:1.3fr .9fr;gap:16px;margin-top:16px}
+    .info-title {font-size:1.3rem;margin:0 0 7px;color:var(--teal)}
+    .small {font-size:.88rem;color:var(--muted)}
+    .status {display:inline-block;padding:3px 10px;border-radius:10px;background:#2e3951;color:#fbe6c4;font-size:.76rem;margin-bottom:10px}
+    .info-body {min-height:145px}
+    .list {margin:0;padding-left:22px}
+    .list li {margin:.4rem 0}
+    footer {border-top:1px solid #2b4667;padding:24px 0 38px;color:#bbccdf;font-size:.88rem}
+    @media(max-width:790px) {.two {grid-template-columns:1fr} header {padding-top:26px} .shell {width:min(1160px,100% - 24px)}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header class="shell">
+    <div class="eyebrow">Kutatási térkép · előzetes webes változat</div>
+    <h1>Quantum Knowledge Graph 1.0</h1>
+    <p class="lead">A modulok egy-egy gráfot alkotnak, együtt pedig tudáshálót. A fizikai fogalmak, matematikai modellek és Python-kísérletek kapcsolatait építjük fel, lépésről lépésre.</p>
+    <div class="badges"><span class="badge">v0.1 · interaktív vázlat</span><span class="badge">Magyar / English struktúra készül</span><span class="badge">Mobilon is böngészhető</span></div>
+  </header>
+  <main class="shell">
+    <div class="notice"><strong>Fontos:</strong> ez még nem a korábbi beszélgetéseink teljes tudásgráfja. A csomópontok egy részleges mentési jegyzék alapján készültek. A részletes modulok, ábrák és kísérletek eredeti forrásainak visszaállítása és ellenőrzése folyamatban van.</div>
+    <section class="panel" aria-label="Tudásháló">
+      <h2>Kattintható tudásháló</h2>
+      <p class="map-help">Válassz témakört, majd koppints a csomópontokra. Telefonon a gráf jobbra-balra elhúzható. A <span aria-hidden="true">╌╌╌</span> szaggatott nyilak fogalmi kapcsolatok, nem feltétlenül fizikai ok-okozatok.</p>
+      <div class="toolbar" role="group" aria-label="Témakörök szűrése">
+        <button type="button" data-filter="mind" aria-pressed="true">Minden terület</button>
+        <button type="button" data-filter="alap" aria-pressed="false">Kvantumalapok</button>
+        <button type="button" data-filter="kemia" aria-pressed="false">Kvantumkémia / VQE</button>
+        <button type="button" data-filter="hidrogen" aria-pressed="false">Hidrogénkötés és rezgések</button>
+      </div>
+      <div class="map-scroll" tabindex="0" role="region" aria-label="Vízszintesen görgethető interaktív tudásgráf">
+        <svg id="graph" viewBox="0 0 950 660" xmlns="http://www.w3.org/2000/svg" aria-label="Kvantumfizikai fogalmi háló"><title>Quantum Knowledge Graph – három témakörrel</title></svg>
+      </div>
+    </section>
+    <div class="two">
+      <section class="panel" aria-live="polite" aria-atomic="true">
+        <h2>Részletek</h2>
+        <div class="info-body"><h3 class="info-title" id="detail-title">Válassz egy csomópontot!</h3><div id="detail-status" class="status">Előzetes térkép</div><p id="detail-description">A csomópontra koppintva itt jelenik meg a rövid fizikai magyarázat és az ellenőrizendő kapcsolatok.</p><p class="small" id="detail-link">A részletes modulok fokozatosan kerülnek fel.</p></div>
+      </section>
+      <section class="panel">
+        <h2>Hogyan bővül?</h2>
+        <ol class="list"><li>Az eredeti chat-modulok mentése és visszakeresése.</li><li>A képletek, grafikonok és Python-programok ellenőrzése.</li><li>Az ellenőrzött csomópontok és kölcsönös hivatkozások publikálása.</li><li>Új kutatási irányok rögzítése külön ötlettárban.</li></ol>
+      </section>
+    </div>
+    <section class="panel" style="margin-top:16px">
+      <h2>Archívum és állapot</h2>
+      <p>A <a href="MENTESI_JEGYZEK.md">MENTESI_JEGYZEK.md</a> tartalmazza a korábbi beszélgetésekből készített első részleges modulleltárt. A <a href="research-inbox.md">research-inbox.md</a> az új kutatási ötletek gyűjtőhelye. A jelenlegi gráf <strong>nem végleges forráskiadvány</strong>, hanem egy közzétehető technikai alap.</p>
+    </section>
+  </main>
+  <footer><div class="shell">Quantum Knowledge Graph 1.0 · kutatási munkafüzet · Első GitHub Pages-vázlat · 2026. október 31.</div></footer>
+  <script>
+    "use strict";
+    const nodes = [
+      {id:"linear",track:"alap",x:30,y:50,label:["Lineáris", "algebra"],desc:"Vektorok, bázisok, mátrixok, sajátértékek. Az operátorok és a kvantumállapotok matematikai alapja."},
+      {id:"operator",track:"alap",x:260,y:50,label:["Operátorok", "és mérés"],desc:"Állapotok és megfigyelhető mennyiségek operátorokkal írhatók le. A mérés és a várható érték kapcsolatát itt rendezzük."},
+      {id:"gates",track:"alap",x:490,y:50,label:["Kvantumkapuk", "és rotációk"],desc:"A qubitállapotokon ható transzformációk; később kódokkal és geometriai szemléltetéssel."},
+      {id:"entanglement",track:"alap",x:720,y:50,label:["Összefonódás", "és rendszerek"],desc:"Többqubites rendszerek kapcsolatai. A részletes bizonyítások az eredeti modulok ellenőrzése után kerülnek ide."},
+      {id:"molecule",track:"kemia",x:30,y:265,label:["Molekula", "és elektronok"],desc:"Elektronok és atommagok kvantumkémiai modellje. Ide kapcsoljuk a H₂ és LiH kísérleteket."},
+      {id:"hamilton",track:"kemia",x:260,y:265,label:["Hamilton-", "operátor"],desc:"A vizsgált rendszer energiáját leíró operátor. A sajátérték-probléma és a VQE központi eleme."},
+      {id:"jordan",track:"kemia",x:490,y:265,label:["Jordan–Wigner", "és Pauli-tagok"],desc:"Fermionikus operátorok qubit-operátorokra való leképezése. Itt jelennek meg a Pauli-sztringek."},
+      {id:"vqe",track:"kemia",x:720,y:265,label:["VQE", "H₂ / LiH"],desc:"Paraméterezett kvantumáramkör és klasszikus optimalizáló együtt közelíti az alapállapoti energiát. A már futtatott kísérletek hivatkozásait később illesztjük be."},
+      {id:"hydrogen",track:"hidrogen",x:30,y:480,label:["Hidrogénkötés", "kölcsönhatás"],desc:"A molekulák között kialakuló kölcsönhatások egyik fontos típusa. A kísérleti modelljeinkhez kapcsolódó fogalmi kiindulópont."},
+      {id:"potential",track:"hidrogen",x:260,y:480,label:["Potenciál", "és egyensúly"],desc:"Az energia távolságfüggése, stabil egyensúly és kis kitérések vizsgálata."},
+      {id:"vibration",track:"hidrogen",x:490,y:480,label:["Rezgések és", "kvantálás"],desc:"Harmonikus modell, rezgési sajátállapotok és diszkrét energiaszintek. Az érvényességi korlátokat minden kísérletnél jelezzük."},
+      {id:"wavefunction",track:"hidrogen",x:720,y:480,label:["Hullámfüggvény", "és sűrűség"],desc:"ψ(x), |ψ(x)|², csomópontok és energiaállapotok. Ide kapcsolhatók a korábbi grafikonok."}
+    ];
+    const edges = [
+      ["linear","operator"],["operator","gates"],["gates","entanglement"],
+      ["molecule","hamilton"],["hamilton","jordan"],["jordan","vqe"],
+      ["hydrogen","potential"],["potential","vibration"],["vibration","wavefunction"],
+      ["operator","hamilton","subtle"],["wavefunction","hamilton","subtle"],["vibration","molecule","subtle"]
+    ];
+    const NS="http://www.w3.org/2000/svg", graph=document.getElementById("graph"), cache=new Map();
+    const el=(tag,attrs={},parent=graph)=>{const e=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);parent.appendChild(e);return e};
+    const indexed=Object.fromEntries(nodes.map(n=>[n.id,n]));
+    for(const [a,b,type] of edges){
+      const s=indexed[a],t=indexed[b],sx=s.x+90,sy=s.y+38,tx=t.x+90,ty=t.y+38;
+      let path;
+      if(s.y===t.y)path=`M ${sx+90} ${sy} L ${tx-90} ${ty}`;
+      else path=`M ${sx} ${sy+40} C ${sx} ${sy+90}, ${tx} ${ty-90}, ${tx} ${ty-40}`;
+      const edge=el("path",{d:path,class:`edge ${type||""}`,"data-a":a,"data-b":b});
+      if(s.y!==t.y) edge.setAttribute("stroke-dasharray","5 6");
+    }
+    let currentFilter="mind";
+    function selectNode(id){
+      const n=indexed[id];document.querySelectorAll(".node").forEach(e=>e.classList.toggle("selected",e.dataset.id===id));
+      document.getElementById("detail-title").textContent=n.label.join(" ");
+      document.getElementById("detail-status").textContent="Vázlat · eredeti forrás ellenőrzendő";
+      document.getElementById("detail-description").textContent=n.desc;
+      document.getElementById("detail-link").textContent="A teljes korábbi modul, kapcsolódó képletek és grafikonok még archiválásra várnak.";
+    }
+    for(const n of nodes){
+      const g=el("g",{class:"node",role:"button",tabindex:"0","data-id":n.id,"data-track":n.track,"aria-label":n.label.join(" "),transform:`translate(${n.x},${n.y})`});
+      el("rect",{x:0,y:0,width:180,height:76},g);
+      const text=el("text",{x:90,"text-anchor":"middle",y:n.label.length===2?29:40},g);
+      n.label.forEach((line,i)=>{const t=el("tspan",{x:90,dy:i?22:0},text);t.textContent=line});
+      g.addEventListener("click",()=>selectNode(n.id));g.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();selectNode(n.id)}});
+      cache.set(n.id,g);
+    }
+    document.querySelectorAll("button[data-filter]").forEach(button=>button.addEventListener("click",()=>{
+      currentFilter=button.dataset.filter;
+      document.querySelectorAll("button[data-filter]").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));
+      nodes.forEach(n=>cache.get(n.id).classList.toggle("faded",currentFilter!=="mind" && n.track!==currentFilter));
+      graph.querySelectorAll(".edge").forEach(edge=>edge.classList.toggle("faded",currentFilter!=="mind" && (indexed[edge.dataset.a].track!==currentFilter || indexed[edge.dataset.b].track!==currentFilter)));
+    }));
+    selectNode("hydrogen");
+  </script>
+</body>
+</html>
