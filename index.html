@@ -112,13 +112,20 @@
       {id:"hydrogen",track:"hidrogen",x:30,y:480,label:["Hidrogénkötés", "kölcsönhatás"],desc:"A molekulák között kialakuló kölcsönhatások egyik fontos típusa. A kísérleti modelljeinkhez kapcsolódó fogalmi kiindulópont."},
       {id:"potential",track:"hidrogen",x:260,y:480,label:["Potenciál", "és egyensúly"],desc:"Az energia távolságfüggése, stabil egyensúly és kis kitérések vizsgálata."},
       {id:"vibration",track:"hidrogen",x:490,y:480,label:["Rezgések és", "kvantálás"],desc:"Harmonikus modell, rezgési sajátállapotok és diszkrét energiaszintek. Az érvényességi korlátokat minden kísérletnél jelezzük."},
-      {id:"wavefunction",track:"hidrogen",x:720,y:480,label:["Hullámfüggvény", "és sűrűség"],desc:"ψ(x), |ψ(x)|², csomópontok és energiaállapotok. Ide kapcsolhatók a korábbi grafikonok."}
+      {id:"wavefunction",track:"hidrogen",x:720,y:480,label:["Hullámfüggvény", "és sűrűség"],desc:"ψ(x), |ψ(x)|², csomópontok és energiaállapotok. Ide kapcsolhatók a korábbi grafikonok."}, 
+      {id:"water",track:"kemia",x:30,y:480,label:"Víz (H₂O)",title:"A vízmolekula",body:"A vízmolekula V alakú. A H–O–H kötésszög körülbelül 104,5°. Az oxigén két kötő és két nemkötő elektronpárja határozza meg az elektronpár-geometriát."},
+{id:"ice",track:"kemia",x:260,y:480,label:"Jég",title:"A jég tetraéderes hálózata",body:"A jégben a vízmolekulák hidrogénkötésekkel közel tetraéderes hálózatot alkotnak. Ez nyitottabb szerkezetet eredményez."},
+{id:"diamond",track:"kemia",x:490,y:480,label:"Gyémánt",title:"A gyémánt kristályszerkezete",body:"A gyémántban minden szénatom négy másik szénatomhoz kapcsolódik erős kovalens kötéssel. A kötésszög körülbelül 109,47°."}
     ];
     const edges = [
       ["linear","operator"],["operator","gates"],["gates","entanglement"],
       ["molecule","hamilton"],["hamilton","jordan"],["jordan","vqe"],
       ["hydrogen","potential"],["potential","vibration"],["vibration","wavefunction"],
-      ["operator","hamilton","subtle"],["wavefunction","hamilton","subtle"],["vibration","molecule","subtle"]
+      ["operator","hamilton","subtle"],["wavefunction","hamilton","subtle"],["vibration","molecule","subtle"], 
+      ["molecule","water"],
+["water","ice"],
+["water","diamond","subtle"],
+["vibration","water"]
     ];
     const NS="http://www.w3.org/2000/svg", graph=document.getElementById("graph"), cache=new Map();
     const el=(tag,attrs={},parent=graph)=>{const e=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);parent.appendChild(e);return e};
