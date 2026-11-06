@@ -80,7 +80,10 @@
     <div class="two">
       <section class="panel" aria-live="polite" aria-atomic="true">
         <h2>Részletek</h2>
-        <div class="info-body"><h3 class="info-title" id="detail-title">Válassz egy csomópontot!</h3><div id="detail-status" class="status">Előzetes térkép</div><p id="detail-description">A csomópontra koppintva itt jelenik meg a rövid fizikai magyarázat és az ellenőrizendő kapcsolatok.</p><p class="small" id="detail-link">A részletes modulok fokozatosan kerülnek fel.</p></div>
+        <div class="info-body"><h3 class="info-title" id="detail-title">Válassz egy csomópontot!</h3><div id="detail-status" class="status">Előzetes térkép</div><p id="detail-description">A csomópontra koppintva itt jelenik meg a rövid fizikai magyarázat és az ellenőrizendő kapcsolatok.</p><p class="small" id="detail-link">A részletes modulok fokozatosan kerülnek fel.</p><img id="detail-image"
+     src=""
+     alt="A vízmolekula tetraéderes szerkezete"
+     style="display:none;width:100%;max-width:760px;height:auto;margin-top:16px;border-radius:12px;"></div>
       </section>
       <section class="panel">
         <h2>Hogyan bővül?</h2>
@@ -148,6 +151,16 @@ body:"A vízmolekula két O–H kovalens kötést tartalmaz. A H–O–H kötés
       document.getElementById("detail-status").textContent="Vázlat · eredeti forrás ellenőrzendő";
       document.getElementById("detail-description").textContent=n.body || n.desc || "";
       document.getElementById("detail-link").textContent="A teljes korábbi modul, kapcsolódó képletek és grafikonok még archiválásra várnak.";
+      const img = document.getElementById("detail-image");
+
+if (img) {
+  if (id === "water") {
+    img.src = "fájl_000000000dc50824693549c28658aa9c0.png";
+    img.style.display = "block";
+  } else {
+    img.style.display = "none";
+  }
+}
       if (scroll) {
   document.getElementById("detail-title")
     .scrollIntoView({
