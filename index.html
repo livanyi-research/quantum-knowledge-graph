@@ -144,9 +144,9 @@ body:"A vízmolekula két O–H kovalens kötést tartalmaz. A H–O–H kötés
     let currentFilter="mind";
     function selectNode(id, scroll = true){
       const n=indexed[id];document.querySelectorAll(".node").forEach(e=>e.classList.toggle("selected",e.dataset.id===id));
-      document.getElementById("detail-title").textContent=n.label.join(" ");
+      document.getElementById("detail-title").textContent=n.title || n.label.join(" ");
       document.getElementById("detail-status").textContent="Vázlat · eredeti forrás ellenőrzendő";
-      document.getElementById("detail-description").textContent=n.desc;
+      document.getElementById("detail-description").textContent=n.body || n.desc || "";
       document.getElementById("detail-link").textContent="A teljes korábbi modul, kapcsolódó képletek és grafikonok még archiválásra várnak.";
       if (scroll) {
   document.getElementById("detail-title")
