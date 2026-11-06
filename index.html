@@ -139,13 +139,20 @@
       if(s.y!==t.y) edge.setAttribute("stroke-dasharray","5 6");
     }
     let currentFilter="mind";
-    function selectNode(id){
+    function selectNode(id, scroll = true){
       const n=indexed[id];document.querySelectorAll(".node").forEach(e=>e.classList.toggle("selected",e.dataset.id===id));
       document.getElementById("detail-title").textContent=n.label.join(" ");
       document.getElementById("detail-status").textContent="Vázlat · eredeti forrás ellenőrzendő";
       document.getElementById("detail-description").textContent=n.desc;
       document.getElementById("detail-link").textContent="A teljes korábbi modul, kapcsolódó képletek és grafikonok még archiválásra várnak.";
+      if (scroll) {
+  document.getElementById("detail-title")
+    .scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
     }
+    } 
     for(const n of nodes){
       const g=el("g",{class:"node",role:"button",tabindex:"0","data-id":n.id,"data-track":n.track,"aria-label":n.label.join(" "),transform:`translate(${n.x},${n.y})`});
       el("rect",{x:0,y:0,width:180,height:76},g);
@@ -160,7 +167,7 @@
       nodes.forEach(n=>cache.get(n.id).classList.toggle("faded",currentFilter!=="mind" && n.track!==currentFilter));
       graph.querySelectorAll(".edge").forEach(edge=>edge.classList.toggle("faded",currentFilter!=="mind" && (indexed[edge.dataset.a].track!==currentFilter || indexed[edge.dataset.b].track!==currentFilter)));
     }));
-    selectNode("hydrogen");
+    selectNode("hydrogen", false);
   </script>
 </body>
 </html>
